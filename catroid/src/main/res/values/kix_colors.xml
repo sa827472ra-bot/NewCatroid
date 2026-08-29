@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Kix Engine Theme Colors
+  ~ Dark Gray + Emerald Green Professional UI
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Kix Engine Primary Colors -->
+    <color name="kix_dark_gray_900">#1A1A1A</color>
+    <color name="kix_dark_gray_800">#2D2D2D</color>
+    <color name="kix_dark_gray_700">#3F3F3F</color>
+    <color name="kix_dark_gray_600">#505050</color>
+    <color name="kix_dark_gray_500">#616161</color>
+    
+    <color name="kix_emerald_primary">#1ABC9C</color>
+    <color name="kix_emerald_light">#2ECC71</color>
+    <color name="kix_emerald_dark">#16A085</color>
+    <color name="kix_emerald_accent">#27AE60</color>
+
+    <!-- Kix Engine UI Colors -->
+    <color name="kix_toolbar_background">@color/kix_dark_gray_900</color>
+    <color name="kix_toolbar_icons">@color/kix_emerald_primary</color>
+    
+    <color name="kix_app_background">@color/kix_dark_gray_800</color>
+    <color name="kix_app_background_dark">@color/kix_dark_gray_900</color>
+    
+    <color name="kix_button_background">@color/kix_dark_gray_700</color>
+    <color name="kix_button_pressed">@color/kix_emerald_dark</color>
+    <color name="kix_button_border">@color/kix_emerald_primary</color>
+    
+    <color name="kix_text_primary">#FFFFFF</color>
+    <color name="kix_text_secondary">#B0BEC5</color>
+    <color name="kix_text_accent">@color/kix_emerald_primary</color>
+    
+    <color name="kix_accent">@color/kix_emerald_primary</color>
+    <color name="kix_accent_light">@color/kix_emerald_light</color>
+    <color name="kix_accent_dark">@color/kix_emerald_dark</color>
+    
+    <color name="kix_separator">#3F3F3F</color>
+    <color name="kix_overlay">#B31A1A1A</color>
+
+    <!-- Kix Engine Brick Colors -->
+    <color name="kix_brick_camera">#1ABC9C</color>
+    <color name="kix_brick_joystick">#2ECC71</color>
+    <color name="kix_brick_network">#27AE60</color>
+    <color name="kix_brick_collision">#16A085</color>
+    <color name="kix_brick_bot">#1ABC9C</color>
+    <color name="kix_brick_preset">#2ECC71</color>
+
+    <!-- Legacy Support (Dark Theme) -->
+    <color name="kix_compatibility_toolbar">@color/kix_dark_gray_800</color>
+    <color name="kix_compatibility_card">@color/kix_dark_gray_700</color>
+
+</resources>
