@@ -41,10 +41,12 @@ object LibraryManager {
         if (!libsDir.exists()) libsDir.mkdirs()
 
         val currentLibFiles = libsDir.listFiles { _, name -> name.endsWith(".newlib") }?.map { it.name } ?: emptyList()
-        val previouslyLoadedIds = loadedLibraries.keys.toSet()
+        val currentKixBlockFiles = libsDir.listFiles { _, name -> name.endsWith(KixCustomBlockPackage.FILE_EXTENSION) }
+            ?.map { it.name } ?: emptyList()
+        val previouslyLoadedIds = loadedLibraries.keys.toSet() + KixCustomBlockPackage.loadedIds()
 
         // 1. Выгружаем библиотеки, которые пользователь удалил
-        val libsToUnload = previouslyLoadedIds - currentLibFiles.toSet()
+        val libsToUnload = previouslyLoadedIds - currentLibFiles.toSet() - currentKixBlockFiles.toSet()
         libsToUnload.forEach { unloadLibrary(it) }
 
         // 2. Загружаем новые или обновленные библиотеки
@@ -52,6 +54,16 @@ object LibraryManager {
             // Можно добавить проверку по дате изменения файла, чтобы перезагружать
             if (!loadedLibraries.containsKey(libFileName)) {
                 loadLibraryFromFile(project, File(libsDir, libFileName))
+            }
+        }
+        currentKixBlockFiles.forEach { fileName ->
+            if (!KixCustomBlockPackage.isLoaded(fileName)) {
+                try {
+                    KixCustomBlockPackage.load(File(libsDir, fileName))
+                } catch (exception: Exception) {
+                    Log.e("LibraryManager", "Unable to load Kix block $fileName", exception)
+                    errors += 1
+                }
             }
         }
 
@@ -106,6 +118,7 @@ object LibraryManager {
         CustomFormulaManager.removeFormulasByOwner(libraryId)
         CustomBrickManager.removeBricksByOwner(libraryId) // Добавим позже
         loadedLibraries.remove(libraryId)
+        KixCustomBlockPackage.unload(libraryId)
     }
 
     // Вспомогательная функция для чтения файла из ZIP-архива

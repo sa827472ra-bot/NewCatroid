@@ -7,6 +7,7 @@ import org.catrobat.catroid.formulaeditor.Formula
 import org.catrobat.catroid.libraries.CustomBrickDefinition
 import org.catrobat.catroid.libraries.LibraryManager
 import org.catrobat.catroid.utils.lunoscript.*
+import org.luaj.vm2.lib.jse.JsePlatform
 
 class CustomAction : TemporalAction() {
     lateinit var scope: Scope
@@ -14,6 +15,7 @@ class CustomAction : TemporalAction() {
     lateinit var parameterFormulas: List<Formula>
 
     override fun update(percent: Float) {
+        definition.luaSource?.let { runLua(it); return }
         val library = LibraryManager.getLoadedLibrary(definition.ownerLibraryId)
         if (library == null) {
             Log.e("CustomAction", "Библиотека ${definition.ownerLibraryId} не найдена для блока ${definition.id}")
@@ -43,6 +45,20 @@ class CustomAction : TemporalAction() {
             // TODO: Сделать паузы
         } catch (e: LunoRuntimeError) {
             Log.e("CustomAction", "Ошибка выполнения скрипта из блока ${definition.id}: ${e.message}", e)
+        }
+    }
+
+    private fun runLua(source: String) {
+        try {
+            val globals = JsePlatform.standardGlobals()
+            globals.set("sprite", org.luaj.vm2.LuaValue.userdataOf(scope.sprite))
+            definition.parameters.forEachIndexed { index, parameter ->
+                val value = parameterFormulas.getOrNull(index)?.interpretObject(scope)?.toString().orEmpty()
+                globals.set(parameter.nameInLuno, org.luaj.vm2.LuaValue.valueOf(value))
+            }
+            globals.load(source).call()
+        } catch (exception: Throwable) {
+            Log.e("CustomAction", "Lua block '${definition.id}' failed", exception)
         }
     }
 }
