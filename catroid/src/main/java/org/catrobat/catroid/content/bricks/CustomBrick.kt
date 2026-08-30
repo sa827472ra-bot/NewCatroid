@@ -110,7 +110,9 @@ class CustomBrick(
             }
 
             when (paramDef.type) {
-                ParameterType.TEXT_FIELD -> {
+                ParameterType.TEXT_FIELD, ParameterType.NUMBER, ParameterType.BOOLEAN,
+                ParameterType.COLOR, ParameterType.FILE, ParameterType.OBJECT_ID,
+                ParameterType.SHADER_SOURCE -> {
                     val formulaView = getFormulaView(index)
                     formulaView?.visibility = View.VISIBLE
 

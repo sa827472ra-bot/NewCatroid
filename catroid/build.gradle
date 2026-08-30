@@ -52,7 +52,7 @@ repositories {
 }
 
 ext {
-    appId = 'org.catrobat.catroid'
+    appId = 'app.kix.blocks'
     appName = '@string/app_name'
     manifestAppName = '@string/app_name'
     manifestAppIcon = '@mipmap/ic_launcher'
@@ -357,7 +357,7 @@ android {
 
     productFlavors {
         danvex {
-            applicationId "org.DanVexTeam.NewCatroid"
+            applicationId "app.kix.blocks"
             isDefault.set(true)
         }
         apktemplate {
