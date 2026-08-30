@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="kix_bg_primary">#121212</color>
+    <color name="kix_bg_secondary">#1E1E1E</color>
+    <color name="kix_emerald_500">#4CAF50</color>
+    <color name="kix_emerald_accent">#00C853</color>
+    <color name="kix_primary">@color/kix_emerald_500</color>
+    <color name="kix_text_primary">#E0E0E0</color>
+</resources>
